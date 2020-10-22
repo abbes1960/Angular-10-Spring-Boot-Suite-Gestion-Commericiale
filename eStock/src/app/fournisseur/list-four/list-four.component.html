@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+     
+        <div>
+          Liste Fournisseur
+        </div>
+        
+      </mat-toolbar>
+    
+       <div class="col-md-12 col-md-offset-2">
+         <div class="table-responsive">
+          <table class="table table-bordered table-responsive-sm table-responsive-md
+         table-responsive-lg">
+          <thead>
+          <tr>
+          <th scope="col">id</th>
+          <th scope="col">libelle</th>
+          <th scope="col">adresse</th>
+          <th class="text-center" scope="col">Action</th>
+          <th>
+           <a class="btn btn-outline-success" (click)="addFour()"><i class="fa fa-plus-square"></i> Create New</a>
+          </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of list | paginate: { itemsPerPage: 3, currentPage: p } ">
+          <th>{{item.id}}</th>
+          <td>{{item.libelle}}</td>
+          <td>{{item.adresse}}</td>
+          <td><button class="btn btn-warning" style="margin-left: 20px;" (click) = "selectData(item)">
+            <i class="fa fa-pencil-square-o" ></i></button></td>
+         <td><button class="btn btn-danger" (click) = "removeData(item.id)">
+            <i class="fa fa-trash-o"></i></button></td>
+             </tr>
+               </tbody>
+               </table>
+               </div>
+               <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  
+             </div>
+    
+    
+    
+    

@@ -1,0 +1,90 @@
+<mat-toolbar color="primary">
+    <div fxHide.gt-xs>
+        <button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div>
+     Gestion Inventaire
+    </div>
+    
+  </mat-toolbar>
+<form [formGroup]="this.service.formData" (ngSubmit)="onSubmit()">
+<input type="hidden"  formControlName="id" id="id">
+<div class ="form-group">
+    <div class="form-group">
+            <label>Num Inventaire  : </label>
+            <input  type="text"  class="form-control" formControlName="numero" id="numero" readonly>
+            <input  type="text"  class="form-control" formControlName="lib_depot" id="lib_depot" readonly>
+        </div>
+      </div>
+<div class="form-group row col-md-12">
+  <div class="col-md-6">
+    <div class="form-group">
+        <label>Date</label>
+        <input  type="date" min="{{minDate}}" class="form-control" formControlName="date_invent" id="date_invent">
+    </div>
+  </div>
+<div class="col-md-6">
+<div class="form-group">
+  <label>Depot </label>
+  <select name="code" class="form-control" formControlName="code_dir" id="code_dir"
+  (change)="onSelectDepot($event.target.value)">
+        
+  <option value="0">-Select-</option>
+  <option *ngFor="let item of this.DepotList" value="{{item.code}}">{{item.libelle}}</option>
+  </select>
+</div>
+</div>
+
+<div class="col-md-12">
+    <div class="form-group row">
+        <label>Libelle</label>
+        <input class="form-control" formControlName="libelle" id="libelle">
+    </div>
+</div>
+  </div>
+  <table class="table table-borderless">
+    <thead class="thead-light">
+      <th>Code</th>
+      <th>Designation</th>
+      <th>Quantité</th>
+     
+      <th>
+        <a class="btn btn-sm btn-success text-white" (click)="AddData(null,1)"><i class="fa fa-plus"></i>Ajouter </a>
+      </th>
+      
+    </thead>
+    <tbody>
+     
+      <tr *ngFor="let item of service.list;let i=index;">
+      <td>{{item.code}}</td>
+      <td>{{item.libart}}</td>
+      <td>{{item.qte}}</td>
+      
+      <td>
+          <a class="btn btn-sm btn-info text-white" (click)="AddData(item,item.id)"><i class="fa fa-pencil"></i></a>
+          <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDelete(item,item.id,i)"><i class="fa fa-trash"></i></a>
+
+          
+        </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="form-group">
+            <label>Total Ht : </label>
+            <input type="text" class="form-control" id="total" formControlName="total" readonly>
+        </div>
+        </div> 
+      </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+    <a class="btn btn-outline-dark ml-1" routerLink="/invents"><i class="fa fa-plus-square"></i> Liste </a>
+
+  </div>
+
+  
+</form> 
+
